@@ -1,15 +1,19 @@
 {
-	"Default Classes": {},
-	"Default Folder": {
-		"groups": [
-			"Default Classes",
-			"Default Forms",
-			"Default Project Methods",
-			"Default Tables"
+	"classes": {
+		"classes": [
+			"bmp",
+			"color",
+			"svg",
+			"xml"
 		]
 	},
-	"Default Forms": {},
-	"Default Project Methods": {},
-	"Default Tables": {},
+	"forms": {
+		"forms": [
+			"COLOR_HSL",
+			"COLOR_PALETTE",
+			"COLOR_RGB",
+			"HDI_COLOR"
+		]
+	},
 	"trash": {}
 }
