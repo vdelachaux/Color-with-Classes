@@ -29,7 +29,7 @@ This class is dedicated to manages color expressions, conversions from one syste
 |.**hslToColor** ( hsl : `Object` ) → `Integer` | Returns an 4D color expression from an HSL object
 |.**hslToRGB** ( hsl : `Object` ) → `Object` | Returns an RGB color object from an HSL object
 |.**hslToCss** ( hsl : `Object` ) → `Object` | Returns an HTML color object from an HSL object
-|.**[getMatchingColors](#getMatchingColors)** ( scheme : `Integer` ) → `Collection` | Returns a collection of harmonized colors
+|.**[getMatchingColors](#getMatchingColors)** ( scheme : `Integer` ) → `Collection` | Returns a collection of harmonized colors (see HDI_COLOR dialog)
 |.**[fontColor](#fontColor)** ( ) → `Text` | Gives the color to make a text readable on a background color.
 
 ### 🔸cs.color.new()
@@ -40,9 +40,9 @@ The class constructor `cs.color.new()` can be called without parameters to creat
 The class constructor also accepts an optional parameter, so you can create a color object by passing an integer (4D color expression), an RGB color object, an HSL color object or a CSS value as text.
 >`cs.color.new(color)
 
-### 🔹<a name="getMatchingColors">getMatchingColors** ()</a>
+### 🔹<a name="getMatchingColors">getMatchingColors ()</a>
 
-> getMatchingColors** ( scheme : `Integer` ) → `Collection`
+> getMatchingColors ( scheme : `Integer` ) → `Collection`
 
 The `getMatchingColors` function returns a collection of harmonized colors with the main color. The number and calculation of colors returned depends on the type of calculation requested. There are 6 [color schemes](https://en.wikipedia.org/wiki/Color_scheme) available according to the `scheme`value:
 
@@ -55,7 +55,7 @@ The `getMatchingColors` function returns a collection of harmonized colors with 
 |4|Monochromatic colors|3|
 |5|Tetradic complementary colors|4|
 
-### 🔹<a name="fontColor"> fontColor** ()</a>
+### 🔹<a name="fontColor"> fontColor ()</a>
 
 The `fontColor` function returns the name of the color ("black" or "white") to use to make the text readable on a background color.
 
