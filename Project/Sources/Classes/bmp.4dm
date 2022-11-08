@@ -33,6 +33,7 @@ Function setPicture($picture : Picture)
 	
 	If (This:C1470.success)
 		
+		This:C1470.map:=Null:C1517
 		This:C1470.data:=$data
 		This:C1470.header:=This:C1470.getHeader()
 		
@@ -243,66 +244,75 @@ Function getDominantColor($accuracy : Integer)->$color : Integer
 	End if 
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
-Function getBitmap()->$map : Object
+Function getBitmap() : Object
+	
+	var $withAlpha : Boolean
+	var $offset; $pixel; $pixels; $x; $y : Integer
+	var $data : Blob
+	var $header; $map : Object
 	
 	If (This:C1470._isOK())
 		
-		$map:=New object:C1471
-		
-		var $header : Object
-		$header:=This:C1470.header
-		
-		var $pixels : Integer
-		$pixels:=$header.pixelNumber-1
-		$map.red:=New collection:C1472.resize($pixels; 0x00FF)
-		$map.blue:=New collection:C1472.resize($pixels; 0x00FF)
-		$map.green:=New collection:C1472.resize($pixels; 0x00FF)
-		
-		var $withAlpha : Boolean
-		$withAlpha:=($header.pixelSize=4)
-		
-		If ($withAlpha)
+		If (This:C1470.map=Null:C1517)
 			
-			$map.alpha:=New collection:C1472.resize($pixels; 0x00FF)
+			$map:=New object:C1471
 			
-		End if 
-		
-		var $x; $y; $offset; $pixel : Integer
-		$x:=$header.x
-		$y:=$header.y
-		$offset:=$header.startOffset
-		
-		var $data : Blob
-		$data:=This:C1470.data
-		
-		//%R-
-		For ($y; Choose:C955($header.lineShift=1; 0; $header.height-1); Choose:C955($header.lineShift=1; $header.height-1; 0); $header.lineShift)
+			$header:=This:C1470.header
 			
-			$pixel:=$y*$header.width
+			$pixels:=$header.pixelNumber-1
+			$map.red:=New collection:C1472.resize($pixels; 0x00FF)
+			$map.blue:=New collection:C1472.resize($pixels; 0x00FF)
+			$map.green:=New collection:C1472.resize($pixels; 0x00FF)
 			
-			For ($x; 0; $header.width-1; 1)
+			$withAlpha:=($header.pixelSize=4)
+			
+			If ($withAlpha)
 				
-				$map.blue[$pixel]:=$data{$offset}
-				$map.green[$pixel]:=$data{$offset+1}
-				$map.red[$pixel]:=$data{$offset+2}
+				$map.alpha:=New collection:C1472.resize($pixels; 0x00FF)
 				
-				If ($withAlpha)
+			End if 
+			
+			$x:=$header.x
+			$y:=$header.y
+			$offset:=$header.startOffset
+			
+			$data:=This:C1470.data
+			
+			//%R-
+			For ($y; Choose:C955($header.lineShift=1; 0; $header.height-1); Choose:C955($header.lineShift=1; $header.height-1; 0); $header.lineShift)
+				
+				$pixel:=$y*$header.width
+				
+				For ($x; 0; $header.width-1; 1)
 					
-					$map.alpha[$pixel]:=$data{$offset+3}
+					$map.blue[$pixel]:=$data{$offset}
+					$map.green[$pixel]:=$data{$offset+1}
+					$map.red[$pixel]:=$data{$offset+2}
 					
-				End if 
+					If ($withAlpha)
+						
+						$map.alpha[$pixel]:=$data{$offset+3}
+						
+					End if 
+					
+					$pixel:=$pixel+1
+					$offset:=$offset+$header.pixelSize
+					
+				End for 
 				
-				$pixel:=$pixel+1
-				$offset:=$offset+$header.pixelSize
+				$offset:=$offset+$header.padding
 				
 			End for 
 			
-			$offset:=$offset+$header.padding
+			//%R+
 			
-		End for 
-		//%R+
+		End if 
+		
+		This:C1470.map:=$map
 		
 	End if 
+	
+	return This:C1470.map
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function getHeader()->$header : Object

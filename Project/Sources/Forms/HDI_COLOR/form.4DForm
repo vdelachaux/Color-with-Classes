@@ -35,6 +35,10 @@
 					"dragging": "none",
 					"method": "ObjectMethods/picture.4dm",
 					"events": [
+						"onMouseUp",
+						"onMouseEnter",
+						"onMouseLeave",
+						"onMouseMove",
 						"onAfterEdit"
 					],
 					"pictureFormat": "proportionalCenter",
@@ -472,6 +476,19 @@
 					"height": 17,
 					"stroke": "#696969",
 					"text": "Legacy Indexed Colors:"
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Pixel sample",
+					"top": 572,
+					"left": 593,
+					"width": 98,
+					"height": 18,
+					"events": [
+						"onClick"
+					],
+					"focusable": false,
+					"dataSource": "Form:C1466.picker"
 				}
 			},
 			"entryOrder": [
@@ -485,7 +502,8 @@
 				"hsl",
 				"rgb",
 				"dominant",
-				"medium"
+				"medium",
+				"Check Box"
 			]
 		}
 	],
@@ -508,7 +526,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 402,
+	"geometryStamp": 412,
 	"windowTitle": "color class",
 	"windowSizingX": "fixed",
 	"windowSizingY": "fixed"
