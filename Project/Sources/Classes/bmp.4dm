@@ -468,6 +468,46 @@ Function getHeader()->$header : Object
 	End if 
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function getPixelOffset($x : Integer; $y : Integer) : Integer
+	
+	var $height; $width : Integer
+	var $header : Object
+	
+	If ($x>=0) && ($y>=0)
+		
+		$header:=This:C1470.header
+		$width:=$header.width
+		$height:=$header.height
+		
+		If ($x<$width) && ($y<$height)
+			
+			return $y*$width+$x
+			
+		End if 
+	End if 
+	
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function getPixel($x : Integer; $y : Integer) : Object
+	
+	var $offset : Integer
+	var $pixel : Object
+	
+	$offset:=This:C1470.getPixelOffset($x; $y)
+	
+	$pixel:=New object:C1471
+	$pixel.red:=This:C1470.map.red[$offset]
+	$pixel.green:=This:C1470.map.green[$offset]
+	$pixel.blue:=This:C1470.map.blue[$offset]
+	
+	If (This:C1470.header.pixelSize=4)  //with alpha
+		
+		$pixel.alpha:=This:C1470.map.alpha[$offset]
+		
+	End if 
+	
+	return $pixel
+	
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function _isOK()->$ok : Boolean
 	
 	Case of 
