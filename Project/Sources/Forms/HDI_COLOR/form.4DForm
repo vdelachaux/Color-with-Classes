@@ -489,6 +489,21 @@
 					],
 					"focusable": false,
 					"dataSource": "Form:C1466.picker"
+				},
+				"zoom": {
+					"type": "input",
+					"left": 711,
+					"top": 572,
+					"width": 53,
+					"height": 53,
+					"enterable": false,
+					"focusable": false,
+					"contextMenu": "none",
+					"dataSourceTypeHint": "picture",
+					"dataSource": "Form:C1466.zoom",
+					"pictureFormat": "scaled",
+					"visibility": "hidden",
+					"borderStyle": "solid"
 				}
 			},
 			"entryOrder": [
@@ -503,7 +518,8 @@
 				"rgb",
 				"dominant",
 				"medium",
-				"Check Box"
+				"Check Box",
+				"zoom"
 			]
 		}
 	],
@@ -526,7 +542,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 412,
+	"geometryStamp": 482,
 	"windowTitle": "color class",
 	"windowSizingX": "fixed",
 	"windowSizingY": "fixed"

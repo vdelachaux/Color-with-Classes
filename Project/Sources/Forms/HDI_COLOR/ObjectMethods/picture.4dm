@@ -32,12 +32,16 @@ Case of
 			
 		Else 
 			
-			Form:C1466.picker:=Form:C1466.picker | Macintosh option down:C545
+			Form:C1466.picker:=Form:C1466.picker || Macintosh option down:C545 || Windows Alt down:C563
 			
 			If (Form:C1466.picker)
 				
 				SET CURSOR:C469(2)
 				OBJECT SET HELP TIP:C1181(*; OBJECT Get name:C1087(Object current:K67:2); "Select a pixel to get its color")
+				
+				$picture:=OBJECT Get value:C1743("picture")
+				TRANSFORM PICTURE:C988($picture; Crop:K61:7; MouseX; MouseY; 1; 1)
+				Form:C1466.zoom:=$picture
 				
 			Else 
 				
@@ -57,8 +61,7 @@ Case of
 		Form:C1466.picker:=False:C215
 		SET CURSOR:C469
 		
-		$picture:=OBJECT Get value:C1743("picture")
-		TRANSFORM PICTURE:C988($picture; Crop:K61:7; MouseX; MouseY; 1; 1)
+		$picture:=Form:C1466.zoom
 		CONVERT PICTURE:C1002($picture; ".bmp")
 		PICTURE TO BLOB:C692($picture; $bmp; ".bmp")
 		
@@ -87,3 +90,5 @@ Case of
 		
 		//______________________________________________________
 End case 
+
+OBJECT SET VISIBLE:C603(*; "zoom"; Form:C1466.picker)
