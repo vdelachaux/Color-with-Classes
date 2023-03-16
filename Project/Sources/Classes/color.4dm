@@ -84,6 +84,14 @@ Function setColorIndexed($color : Integer) : cs:C1710.color
 	return (This:C1470)
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function colorPicker() : Integer
+	
+	This:C1470.main:=Select RGB color:C956(This:C1470.main)
+	This:C1470.setColor(This:C1470.main)
+	
+	return This:C1470.main
+	
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 	// RGB Color
 Function setRGB($rgb : Object) : cs:C1710.color
 	

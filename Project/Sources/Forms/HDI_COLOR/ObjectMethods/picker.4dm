@@ -1,2 +1,2 @@
-Form:C1466.main:=Select RGB color:C956(Form:C1466.main)
+Form:C1466.main:=Form:C1466.color.colorPicker()
 SET TIMER:C645(-1)
