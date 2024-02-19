@@ -43,7 +43,15 @@ Class constructor($color)
 			//______________________________________________________
 		: (Value type:C1509($color)=Is text:K8:3)  // CSS Color
 			
-			This:C1470.setCSS($color)
+			If ($color="highlightColor")
+				
+				This:C1470.highlightColor()
+				
+			Else 
+				
+				This:C1470.setCSS($color)
+				
+			End if 
 			
 			//______________________________________________________
 		: (Value type:C1509($color)=Is real:K8:4)\
@@ -742,6 +750,43 @@ Function fontColor($backgroundColor; $green : Integer; $blue : Integer) : Text
 		
 		$lightness:=1-(((0.299*$rgb.red)+(0.587*$rgb.green)+(0.114*$rgb.blue))/255)
 		return ($lightness<0.5 ? "black" : "white")
+		
+	End if 
+	
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function highlightColor() : cs:C1710.color
+	
+/*
+From Arnaud de Montard
+https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
+*/
+	
+	If (Is macOS:C1572)
+		
+		var $systemWorker : 4D:C1709.SystemWorker:=4D:C1709.SystemWorker.new("defaults read -g AppleHighlightColor")
+		var $t : Text:=$systemWorker.wait(1).response  //timeout 1 second
+		
+		If (Length:C16($t)>0)
+			
+			var $c : Collection:=Split string:C1554(Substring:C12($t; 1; Length:C16($t)-1); " ")
+			
+			If ($c.length>2)
+				
+				$o:={\
+					red: Round:C94(Num:C11($c[0]; ".")*255; 0); \
+					green: Round:C94(Num:C11($c[1]; ".")*255; 0); \
+					blue: Round:C94(Num:C11($c[2]; ".")*255; 0)\
+					}
+				
+				return This:C1470.setRGB($o)
+				
+			End if 
+		End if 
+		
+	Else 
+		
+		//🤔
+		return This:C1470
 		
 	End if 
 	

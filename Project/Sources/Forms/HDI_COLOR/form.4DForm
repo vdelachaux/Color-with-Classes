@@ -504,6 +504,18 @@
 					"pictureFormat": "scaled",
 					"visibility": "hidden",
 					"borderStyle": "solid"
+				},
+				"Button": {
+					"type": "button",
+					"text": "Highlight color",
+					"top": 24,
+					"left": 385,
+					"width": 148,
+					"height": 24,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button.4dm"
 				}
 			},
 			"entryOrder": [
@@ -519,7 +531,8 @@
 				"dominant",
 				"medium",
 				"Check Box",
-				"zoom"
+				"zoom",
+				"Button"
 			]
 		}
 	],
@@ -542,7 +555,7 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"geometryStamp": 482,
+	"geometryStamp": 489,
 	"windowTitle": "color class",
 	"windowSizingX": "fixed",
 	"windowSizingY": "fixed"
