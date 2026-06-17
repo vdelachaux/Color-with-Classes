@@ -2,9 +2,7 @@
 	"classes": {
 		"classes": [
 			"bmp",
-			"color",
-			"svg",
-			"xml"
+			"color"
 		]
 	},
 	"forms": {

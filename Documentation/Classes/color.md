@@ -35,7 +35,7 @@ This class is dedicated to manages color expressions, conversions from one syste
 
 ### 🔸cs.color.new()
 
-The class constructor `cs.color.new()` can be called without parameters to create an empty color object in memory.
+The class constructor `cs.color.new()` can be called without parameters to create a color object in memory with `main` initialized to `0x0000`.
 >`cs.color.new()
 
 The class constructor also accepts an optional parameter, so you can create a color object by passing an integer (4D color\*), an RGB color object, an HSL color object or a CSS value as text.
@@ -74,6 +74,8 @@ Give a color object to use as a background color
 
 ----
 \* ***4D color*** *is a 4-byte Long Integer (format 0x00rrggbb).*
+
+\* A 4D color does not handle an alpha channel.
 	
 	rr = red component of the color
 	gg = green component of the color

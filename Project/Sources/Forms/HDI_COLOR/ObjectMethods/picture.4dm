@@ -1,9 +1,4 @@
-var $picture : Picture
-var $o; $offset; $rgb; $size; $skip : Integer
-var $bmp; $data; $x : Blob
-var $e : Object
-
-$e:=FORM Event:C1606
+var $e:=FORM Event:C1606
 
 Case of 
 		
@@ -39,7 +34,7 @@ Case of
 				SET CURSOR:C469(2)
 				OBJECT SET HELP TIP:C1181(*; OBJECT Get name:C1087(Object current:K67:2); "Select a pixel to get its color")
 				
-				$picture:=OBJECT Get value:C1743("picture")
+				var $picture : Picture:=OBJECT Get value:C1743("picture")
 				TRANSFORM PICTURE:C988($picture; Crop:K61:7; MouseX; MouseY; 1; 1)
 				Form:C1466.zoom:=$picture
 				
@@ -61,23 +56,30 @@ Case of
 		Form:C1466.picker:=False:C215
 		SET CURSOR:C469
 		
+		var $rgb : Integer
+		
 		$picture:=Form:C1466.zoom
 		CONVERT PICTURE:C1002($picture; ".bmp")
+		
+		var $bmp : Blob
 		PICTURE TO BLOB:C692($picture; $bmp; ".bmp")
 		
 		If (BLOB size:C605($bmp)>=18)
 			
+			var $x : Blob
 			COPY BLOB:C558($bmp; $x; 0; 0; 14)
 			
-			$o:=0x0000
+			var $o : Integer:=0x0000
 			
 			If (BLOB to integer:C549($x; PC byte ordering:K22:3; $o)=0x4D42)
 				
-				$size:=BLOB to longint:C551($x; PC byte ordering:K22:3; $o)
+				// Get size & offset
+				var $size:=BLOB to longint:C551($x; PC byte ordering:K22:3; $o)
+				var $skip:=BLOB to integer:C549($x; PC byte ordering:K22:3; $o)
 				$skip:=BLOB to integer:C549($x; PC byte ordering:K22:3; $o)
-				$skip:=BLOB to integer:C549($x; PC byte ordering:K22:3; $o)
-				$offset:=BLOB to longint:C551($x; PC byte ordering:K22:3; $o)
+				var $offset:=BLOB to longint:C551($x; PC byte ordering:K22:3; $o)
 				
+				var $data : Blob
 				COPY BLOB:C558($bmp; $data; $offset; 0; $size-$offset)
 				$rgb:=BLOB to longint:C551($data; PC byte ordering:K22:3) & 0x00FFFFFF
 				
