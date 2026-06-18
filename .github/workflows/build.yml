@@ -20,14 +20,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-#       # Get dependencies
-#       - name: Get SVG with Classes
-#         uses: actions/checkout@v4
-#         with:
-#           repository: vdelachaux/SVG-with-Classes
-#           path: Components/SVG with Classes.4dbase
+        uses: actions/checkout@v5
 
       - name: Build
         uses: ./.github/actions/4d-build
