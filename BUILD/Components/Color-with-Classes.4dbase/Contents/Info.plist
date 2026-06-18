@@ -6,15 +6,15 @@
     <key>NSHumanReadableCopyright</key>
     <string>©vdl 2021-2026</string>
     <key>CFBundleVersion</key>
-    <string>315</string>
+    <string>316</string>
     <key>CFBundleDisplayName</key>
     <string>color-with-classes</string>
     <key>CFBundleShortVersionString</key>
-    <string>21.1</string>
+    <string>21R4</string>
     <key>CFBundleGetInfoString</key>
-    <string>21.1</string>
+    <string>21R4</string>
     <key>CFBundleLongVersionString</key>
-    <string>21.1 (314)</string>
+    <string>21R4 (315)</string>
     <key>CFBundleName</key>
     <string>Color-with-Classes</string>
   </dict>

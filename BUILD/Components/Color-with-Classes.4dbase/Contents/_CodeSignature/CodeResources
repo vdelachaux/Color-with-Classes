@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/InfoPlist.strings</key>
 		<data>
-		CJETc1TRFMUVzAG2lWLk1cBSlXI=
+		na034tBwAdtp7UIcYZ2wR6J1Nzk=
 		</data>
 		<key>Resources/color-matching-constants.xlf</key>
 		<data>
@@ -20,7 +20,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			q+jjNyC2Atri5vbAvjnLLrpOBCo=
+			Fg/B8RO2klo81DrGE/B0GmNmdEE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -36,7 +36,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			3u4GKSXy2Fr0WECpFwRiUfdYxUg=
+			0CSTRNJpr5C7qKZEs5HR+mrY2Kc=
 			</data>
 			<key>requirement</key>
 			<string>identifier "Color-with-Classes.4DZ" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = DYRKW64QA9</string>
@@ -66,14 +66,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			890+0IselqcF/bZcrg+EHhCzZC7zpyUu4WfFC9B5X/o=
+			4daR0YGWEZd07tpkkLsybzcjbZojYjUqz74frloEuMM=
 			</data>
 		</dict>
 		<key>Resources/InfoPlist.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JJ22cMJ9gSDfm2PRoN+JAfbElG7FBycGnJ0SJXuyO9w=
+			3L1Ktogv7WhkL74t4z+JDqAyOMgqB1g03NxHbc2fKmA=
 			</data>
 		</dict>
 		<key>Resources/color-matching-constants.xlf</key>
@@ -94,7 +94,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rUXRvQIA4hUErfHuSiIb/wwMF0qfSiaAU7IWtlHdiEs=
+			GkWm6cdaNOqDJc4wzBs5A4DyMk7p2cgg/Pyguj+gE2s=
 			</data>
 			<key>optional</key>
 			<true/>

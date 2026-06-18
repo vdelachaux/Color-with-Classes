@@ -3,7 +3,7 @@ var $e:=FORM Event:C1606
 Case of 
 		
 		//______________________________________________________
-	: ($e.code=On Data Change:K2:15)
+	: ($e.code=On After Edit:K2:43)
 		
 		If (Bool:C1537(OBJECT Get value:C1743("medium")))
 			
@@ -51,7 +51,7 @@ Case of
 		SET CURSOR:C469
 		
 		//______________________________________________________
-	: ($e.code=On Mouse Up:K2:58)
+	: (Form:C1466.picker) && ($e.code=On Mouse Up:K2:58)
 		
 		Form:C1466.picker:=False:C215
 		SET CURSOR:C469

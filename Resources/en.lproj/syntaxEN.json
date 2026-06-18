@@ -1,6 +1,6 @@
 {
 	"_method_": {},
-	"cs.colors": {
+	"cs.colorTools": {
 		"color": {
 			"new()": {
 				"Syntax": "**.new**( *color* : Variant )",
@@ -56,11 +56,11 @@
 			"Summary": ""
 		},
 		"highlightColor()": {
-			"Syntax": "**.highlightColor**() : cs.colors.color",
+			"Syntax": "**.highlightColor**() : cs.colorTools.color",
 			"Params": [
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],
@@ -185,7 +185,7 @@
 			"Summary": ""
 		},
 		"setColorIndexed()": {
-			"Syntax": "**.setColorIndexed**( *color* : Integer ) : cs.colors.color",
+			"Syntax": "**.setColorIndexed**( *color* : Integer ) : cs.colorTools.color",
 			"Params": [
 				[
 					"color",
@@ -194,7 +194,7 @@
 				],
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],
@@ -238,7 +238,7 @@
 			"Summary": ""
 		},
 		"setRGB()": {
-			"Syntax": "**.setRGB**( *rgb* : Object ) : cs.colors.color",
+			"Syntax": "**.setRGB**( *rgb* : Object ) : cs.colorTools.color",
 			"Params": [
 				[
 					"rgb",
@@ -247,7 +247,7 @@
 				],
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],
@@ -265,7 +265,7 @@
 			"Summary": ""
 		},
 		"setColor()": {
-			"Syntax": "**.setColor**( *color* : Integer ) : cs.colors.color",
+			"Syntax": "**.setColor**( *color* : Integer ) : cs.colorTools.color",
 			"Params": [
 				[
 					"color",
@@ -274,14 +274,14 @@
 				],
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
 		"setCSS()": {
-			"Syntax": "**.setCSS**( *css* : Text ) : cs.colors.color",
+			"Syntax": "**.setCSS**( *css* : Text ) : cs.colorTools.color",
 			"Params": [
 				[
 					"css",
@@ -290,14 +290,14 @@
 				],
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],
 			"Summary": ""
 		},
 		"setHSL()": {
-			"Syntax": "**.setHSL**( *hsl* : Object ) : cs.colors.color",
+			"Syntax": "**.setHSL**( *hsl* : Object ) : cs.colorTools.color",
 			"Params": [
 				[
 					"hsl",
@@ -306,7 +306,7 @@
 				],
 				[
 					"",
-					"cs.colors.color",
+					"cs.colorTools.color",
 					"<-"
 				]
 			],

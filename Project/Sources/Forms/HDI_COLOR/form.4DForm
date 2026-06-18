@@ -36,6 +36,8 @@
 					"method": "ObjectMethods/picture.4dm",
 					"events": [
 						"onMouseUp",
+						"onDrop",
+						"onDataChange",
 						"onMouseEnter",
 						"onMouseLeave",
 						"onMouseMove",

@@ -8,7 +8,6 @@
 	"forms": {
 		"forms": [
 			"COLOR_HSL",
-			"COLOR_PALETTE",
 			"COLOR_RGB",
 			"HDI_COLOR"
 		]
