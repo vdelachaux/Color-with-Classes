@@ -1,4 +1,4 @@
-<!-- cs.color.new({color}) -->
+<!-- cs.colorTools.color.new({color}) -->
 ## color
 
 This class is dedicated to manages color expressions, conversions from one system to another and the calculation of color harmonies.
@@ -14,15 +14,15 @@ This class is dedicated to manages color expressions, conversions from one syste
 |**.hsl**|Object|{<br/>   "hue",<br/>   "saturation",<br/>   "lightness"<br/>}||**Null**|
 |**.css**|Object|{<br/>   "components" [rgb(red, green, blue)], <br/>   "percentage" [rgb(%red, %green, %blue)],<br/>   "hex" [#RGB],<br/>   "hexLong" [#RRGGBB], <br/>   "hsl" [hsl(hue, saturation, lightness)],<br/>    "name" [named color]<br/>}|**Null**|
 
-> 📌 With the exception of functions that return a specific result (getter function), each call returns the original `cs.color` object, and you can include one call after another.
+> 📌 With the exception of functions that return a specific result (getter function), each call returns the original `cs.colorTools.color` object, and you can include one call after another.
 
 |Function|Action|
 |--------|------|   
-|.**setColor** ( color : `Integer` ) → `cs.color` | Set the main color with the 4D color\* expression
-|.**setRGB** ( color : `Object` ) → `cs.color` | Set the main color with a RGB color object
-|.**setHSL** ( color : `Object` ) → `cs.color` | Set the main color with a HSL color object
-|.**setCSS** ( color : `Text` ) → `cs.color` | Set the main color with an HTML color
-|.**setColorIndexed** ( index : `Integer` ) → `cs.color` | Set the main color with the legacy 4D palette index
+|.**setColor** ( color : `Integer` ) → `cs.colorTools.color` | Set the main color with the 4D color\* expression
+|.**setRGB** ( color : `Object` ) → `cs.colorTools.color` | Set the main color with a RGB color object
+|.**setHSL** ( color : `Object` ) → `cs.colorTools.color` | Set the main color with a HSL color object
+|.**setCSS** ( color : `Text` ) → `cs.colorTools.color` | Set the main color with an HTML color
+|.**setColorIndexed** ( index : `Integer` ) → `cs.colorTools.color` | Set the main color with the legacy 4D palette index
 |.**colorPicker** () → `Integer` | Displays the system color selection window and returns the 4D color\* selected by the user. This function updates the `main`, `rgb`, `hsl` and `css` properties.
 |.**colorToRGB** ( color : `Integer` ) → `Object` | Returns a RGB color object
 |.**colorToCSS** ( color : `Integer` {; type : `Text`} ) → `Text` | `Object` | Returns an HTML color string or object with multiple CSS formats
@@ -32,17 +32,17 @@ This class is dedicated to manages color expressions, conversions from one syste
 |.**hslToColor** ( hsl : `Object` ) → `Integer` | Returns an 4D color\* expression from an HSL object
 |.**hslToRGB** ( hsl : `Object` ) → `Object` | Returns an RGB color object from an HSL object
 |.**hslToCss** ( hsl : `Object` ) → `Text` | Returns an HTML color string from an HSL object
-|.**highlightColor** () → `cs.color` | Retrieves the system highlight color (macOS via defaults, Windows via registry) and sets it as the current color
+|.**highlightColor** () → `cs.colorTools.color` | Retrieves the system highlight color (macOS via defaults, Windows via registry) and sets it as the current color
 |.**[getMatchingColors](#getMatchingColors)** ( scheme : `Integer` ) → `Collection` | Returns a collection of harmonized colors (see HDI_COLOR dialog)
 |.**fontColor** ( {color : `Integer`} {; green : `Integer`} {; blue : `Integer`} ) → `Text` | Returns "black" or "white" for text readability on the given background color
 
-### 🔸cs.color.new()
+### 🔸cs.colorTools.color.new()
 
-The class constructor `cs.color.new()` can be called without parameters to create a color object in memory with `main` initialized to `0x0000`.
->`cs.color.new()
+The class constructor `cs.colorTools.color.new()` can be called without parameters to create a color object in memory with `main` initialized to `0x0000`.
+>`cs.colorTools.color.new()
 
 The class constructor also accepts an optional parameter, so you can create a color object by passing an integer (4D color\*), an RGB color object, an HSL color object or a CSS value as text.
->`cs.color.new(color)
+>`cs.colorTools.color.new(color)
 
 ### 🔹<a name="getMatchingColors">getMatchingColors ()</a>
 
@@ -71,7 +71,7 @@ These constants are defined in the constants theme `Color Matching Scheme`.
 
 The `highlightColor` function retrieves the system selection/highlight color from the operating system and applies it to the current color object.
 
-> highlightColor** ( ) → `cs.color`
+> highlightColor** ( ) → `cs.colorTools.color`
 
 **Cross-platform support:**
 - **macOS**: Reads the system highlight color via `defaults read -g AppleHighlightColor`
@@ -80,7 +80,7 @@ The `highlightColor` function retrieves the system selection/highlight color fro
 
 **Example:**
 ```4d
-var $systemHighlight := cs.color.new("highlightColor")
+var $systemHighlight := cs.colorTools.color.new("highlightColor")
 // Now $systemHighlight.main contains the system highlight color
 // You can chain other methods:
 $systemHighlight.fontColor()  // Get contrasting text color

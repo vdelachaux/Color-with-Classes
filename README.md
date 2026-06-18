@@ -25,14 +25,14 @@ Analyzes BMP images for color extraction and analysis.
 
 ```4d
 // Create a color from various sources
-var $color := cs.color.new(0x00FF8040)        // 4D color
-var $color := cs.color.new("#FF8040")         // Hex CSS
-var $color := cs.color.new("rgb(255,128,64)") // RGB CSS
-var $color := cs.color.new({red: 255; green: 128; blue: 64})  // RGB object
-var $color := cs.color.new("coral")           // Named color
+var $color := cs.colorTools.color.new(0x00FF8040)        // 4D color
+var $color := cs.colorTools.color.new("#FF8040")         // Hex CSS
+var $color := cs.colorTools.color.new("rgb(255,128,64)") // RGB CSS
+var $color := cs.colorTools.color.new({red: 255; green: 128; blue: 64})  // RGB object
+var $color := cs.colorTools.color.new("coral")           // Named color
 
 // Get the system highlight color
-var $highlightColor := cs.color.new("highlightColor")  // macOS + Windows
+var $highlightColor := cs.colorTools.color.new("highlightColor")  // macOS + Windows
 
 // Work with color harmonies
 var $complementary := $color.getMatchingColors(kMatchingSchemeComplementary)

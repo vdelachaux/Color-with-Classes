@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/InfoPlist.strings</key>
 		<data>
-		na034tBwAdtp7UIcYZ2wR6J1Nzk=
+		Z5K25P8IvPC14R1vCj0yxXHvk2g=
 		</data>
 		<key>Resources/color-matching-constants.xlf</key>
 		<data>
@@ -36,7 +36,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			0CSTRNJpr5C7qKZEs5HR+mrY2Kc=
+			UoTfgW/CDltXN2A32PE3GjEr+Yc=
 			</data>
 			<key>requirement</key>
 			<string>identifier "Color-with-Classes.4DZ" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = DYRKW64QA9</string>
@@ -52,7 +52,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			va5R3PuzQj9NodVzKJ2ZCEhZmxQde95i84vDZqbkdms=
+			qqUCOIOgzbEWO7ToZeYs68uUD7vjNSe3R2XE7FjBmJs=
 			</data>
 		</dict>
 		<key>Documentation/hdi.png</key>
@@ -66,14 +66,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4daR0YGWEZd07tpkkLsybzcjbZojYjUqz74frloEuMM=
+			DEKmgIoduroBNTT6UyB9PIxU/HKsdBbvqFax/FzN7V0=
 			</data>
 		</dict>
 		<key>Resources/InfoPlist.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3L1Ktogv7WhkL74t4z+JDqAyOMgqB1g03NxHbc2fKmA=
+			Rh5tnIe/5SNNTgnm6kCRr66sG44Ste2lbSCYYpgh1IY=
 			</data>
 		</dict>
 		<key>Resources/color-matching-constants.xlf</key>
