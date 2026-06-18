@@ -1,4 +1,4 @@
-property main : Integer
+property _main : Integer
 property rgb; hsl; css : Object
 
 Class constructor($color)
@@ -67,12 +67,23 @@ Class constructor($color)
 			//______________________________________________________
 	End case 
 	
+	//MARK:-[GETTER/SETTER]
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function get main() : Integer
+	
+	return This:C1470._main
+	
+	// === === === === === === === === === === === === === === === === === === === === === === === === ===
+Function set main($value : Integer)
+	
+	This:C1470.setColor($value)
+	
 	//MARK:-[SETTERS]
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 	// 4D color expression
 Function setColor($color : Integer) : cs:C1710.color
 	
-	This:C1470.main:=$color
+	This:C1470._main:=$color
 	This:C1470.rgb:=This:C1470.colorToRGB($color)
 	This:C1470.hsl:=This:C1470.colorToHSL($color)
 	This:C1470.css:=This:C1470.colorToCSS($color)
@@ -95,7 +106,6 @@ Function setColorIndexed($color : Integer) : cs:C1710.color
 Function colorPicker() : Integer
 	
 	This:C1470.main:=Select RGB color:C956(This:C1470.main)
-	This:C1470.setColor(This:C1470.main)
 	
 	return This:C1470.main
 	
@@ -103,10 +113,11 @@ Function colorPicker() : Integer
 	// RGB Color
 Function setRGB($rgb : Object) : cs:C1710.color
 	
+	var $color : Integer
+	
 	This:C1470.rgb:=$rgb
-	This:C1470.main:=(This:C1470.rgb.red << 16)+(This:C1470.rgb.green << 8)+This:C1470.rgb.blue
-	This:C1470.hsl:=This:C1470.colorToHSL(This:C1470.main)
-	This:C1470.css:=This:C1470.colorToCSS(This:C1470.main)
+	$color:=(This:C1470.rgb.red << 16)+(This:C1470.rgb.green << 8)+This:C1470.rgb.blue
+	This:C1470.main:=$color
 	
 	return (This:C1470)
 	
@@ -114,10 +125,12 @@ Function setRGB($rgb : Object) : cs:C1710.color
 	// HSL Color
 Function setHSL($hsl : Object) : cs:C1710.color
 	
+	var $color : Integer
+	
 	This:C1470.hsl:=$hsl
 	This:C1470.rgb:=This:C1470.hslToRGB($hsl)
-	This:C1470.main:=(This:C1470.rgb.red << 16)+(This:C1470.rgb.green << 8)+This:C1470.rgb.blue
-	This:C1470.css:=This:C1470.colorToCSS(This:C1470.main)
+	$color:=(This:C1470.rgb.red << 16)+(This:C1470.rgb.green << 8)+This:C1470.rgb.blue
+	This:C1470.main:=$color
 	
 	return (This:C1470)
 	
@@ -268,14 +281,14 @@ Function colorToCSS($color : Integer; $type : Text)->$css
 		
 		$o:=JSON Parse:C1218(File:C1566("/RESOURCES/colors.json").getText()).named.query("red = :1 AND green = :2 AND blue = :3"; $red; $green; $blue).pop()
 		
-		$css:=New object:C1471(\
-			"components"; This:C1470.colorToCSS($color; "components"); \
-			"percentages"; This:C1470.colorToCSS($color; "percentages"); \
-			"hex"; This:C1470.colorToCSS($color; "hex"); \
-			"hexLong"; This:C1470.colorToCSS($color; "hexLong"); \
-			"hsl"; This:C1470.colorToCSS($color; "hsl"); \
-			"name"; Choose:C955($o=Null:C1517; Null:C1517; $o.name)\
-			)
+		$css:={\
+			components: This:C1470.colorToCSS($color; "components"); \
+			percentages: This:C1470.colorToCSS($color; "percentages"); \
+			hex: This:C1470.colorToCSS($color; "hex"); \
+			hexLong: This:C1470.colorToCSS($color; "hexLong"); \
+			hsl: This:C1470.colorToCSS($color; "hsl"); \
+			name: Choose:C955($o=Null:C1517; Null:C1517; $o.name)\
+			}
 		
 	End if 
 	
@@ -318,7 +331,7 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 	Case of 
 			
 			//________________________________________
-		: ($kind=0)  // Complementary color (1)
+		: ($kind=kMatchingSchemeComplementary)  // Complementary color (1)
 			
 			Case of 
 					
@@ -335,24 +348,24 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue<=180)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+180; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+180; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				Else 
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-180; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-180; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 			End case 
 			
 			//________________________________________
-		: ($kind=1)  // Complementary colors separated (2)
+		: ($kind=kMatchingSchemeSplitComplementary)  // Complementary colors separated (2)
 			
 			Case of 
 					
@@ -361,66 +374,66 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					
 					$palette.push(0x00FFFFFF)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue; \
-						"saturation"; 50; \
-						"lightness"; 100)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue; \
+						saturation: 50; \
+						lightness: 100}))
 					
 					//………………………………………………………………………
 				: (This:C1470.main=0x00FFFFFF)  // White
 					
 					$palette.push(0x0000)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue; \
-						"saturation"; 50; \
-						"lightness"; 100)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue; \
+						saturation: 50; \
+						lightness: 100}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue<=150)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+150; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+150; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+210; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+210; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>150)\
 					 & (This:C1470.hsl.hue<=210)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+150; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+150; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-150; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-150; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>210)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-150; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-150; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-210; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-210; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 			End case 
 			
 			//________________________________________
-		: ($kind=2)  // Triadic complementary colors (2)
+		: ($kind=kMatchingSchemeTriadic)  // Triadic complementary colors (2)
 			
 			Case of 
 					
@@ -439,48 +452,48 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue<=120)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+120; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+120; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+240; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+240; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>120)\
 					 & (This:C1470.hsl.hue<=240)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+120; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+120; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-120; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-120; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>240)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-120; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-120; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-240; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-240; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 			End case 
 			
 			//________________________________________
-		: ($kind=3)  // Analogous colors (2)
+		: ($kind=kMatchingSchemeAnalogous)  // Analogous colors (2)
 			
 			Case of 
 					
@@ -499,66 +512,66 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue<=30)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+30; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+30; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; 360-(30-This:C1470.hsl.hue); \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: 360-(30-This:C1470.hsl.hue); \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>30)\
 					 & (This:C1470.hsl.hue<=330)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+30; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+30; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-30; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-30; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>330)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-30; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-30; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-330; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-330; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 			End case 
 			
 			//________________________________________
-		: ($kind=4)  // Monochromatic colors (3)
+		: ($kind=kMatchingSchemeMonochromatic)  // Monochromatic colors (3)
 			
-			$palette.push(This:C1470.hslToColor(New object:C1471(\
-				"hue"; This:C1470.hsl.hue; \
-				"saturation"; 100; \
-				"lightness"; 50)))
+			$palette.push(This:C1470.hslToColor({\
+				hue: This:C1470.hsl.hue; \
+				saturation: 100; \
+				lightness: 50}))
 			
-			$palette.push(This:C1470.hslToColor(New object:C1471(\
-				"hue"; This:C1470.hsl.hue; \
-				"saturation"; 50; \
-				"lightness"; 100)))
+			$palette.push(This:C1470.hslToColor({\
+				hue: This:C1470.hsl.hue; \
+				saturation: 50; \
+				lightness: 100}))
 			
-			$palette.push(This:C1470.hslToColor(New object:C1471(\
-				"hue"; This:C1470.hsl.hue; \
-				"saturation"; 90; \
-				"lightness"; 40)))
+			$palette.push(This:C1470.hslToColor({\
+				hue: This:C1470.hsl.hue; \
+				saturation: 90; \
+				lightness: 40}))
 			
 			//________________________________________
-		: ($kind=5)  // Tetradic complementary colors (4)
+		: ($kind=kMatchingSchemeTetradic)  // Tetradic complementary colors (4)
 			
 			Case of 
 					
@@ -569,10 +582,10 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					$palette.push(0x00D6D6D6)
 					$palette.push(0x00929292)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue; \
-						"saturation"; 50; \
-						"lightness"; 100)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue; \
+						saturation: 50; \
+						lightness: 100}))
 					
 					//………………………………………………………………………
 				: (This:C1470.main=0x00FFFFFF)  // White
@@ -583,120 +596,120 @@ Function getMatchingColors($kind : Integer)->$palette : Collection
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue<=45)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+225; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+225; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+315; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+315; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>45)\
 					 & (This:C1470.hsl.hue<=135)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+225; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+225; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>135)\
 					 & (This:C1470.hsl.hue<=90)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+225; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+225; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>135)\
 					 & (This:C1470.hsl.hue<=225)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 				: (This:C1470.hsl.hue>225)
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue+45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue+45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-225; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-225; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-135; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-135; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
-					$palette.push(This:C1470.hslToColor(New object:C1471(\
-						"hue"; This:C1470.hsl.hue-45; \
-						"saturation"; This:C1470.hsl.saturation; \
-						"lightness"; This:C1470.hsl.lightness)))
+					$palette.push(This:C1470.hslToColor({\
+						hue: This:C1470.hsl.hue-45; \
+						saturation: This:C1470.hsl.saturation; \
+						lightness: This:C1470.hsl.lightness}))
 					
 					//………………………………………………………………………
 			End case 
@@ -721,10 +734,10 @@ Function fontColor($backgroundColor; $green : Integer; $blue : Integer) : Text
 		: (Value type:C1509($backgroundColor)=Is real:K8:4)\
 			 | (Value type:C1509($backgroundColor)=Is longint:K8:6)
 			
-			$rgb:=New object:C1471(\
-				"red"; $backgroundColor; \
-				"green"; 0; \
-				"blue"; 0)
+			$rgb:={\
+				red: $backgroundColor; \
+				green: 0; \
+				blue: 0}
 			
 			If (Count parameters:C259>=2)
 				
@@ -756,6 +769,11 @@ Function fontColor($backgroundColor; $green : Integer; $blue : Integer) : Text
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function highlightColor() : cs:C1710.color
 	
+	var $c : Collection
+	var $o : Object
+	var $systemWorker : 4D:C1709.SystemWorker
+	var $t : Text
+	
 /*
 From Arnaud de Montard
 https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
@@ -763,12 +781,12 @@ https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
 	
 	If (Is macOS:C1572)
 		
-		var $systemWorker : 4D:C1709.SystemWorker:=4D:C1709.SystemWorker.new("defaults read -g AppleHighlightColor")
-		var $t : Text:=$systemWorker.wait(1).response  //timeout 1 second
+		$systemWorker:=4D:C1709.SystemWorker.new("defaults read -g AppleHighlightColor")
+		$t:=$systemWorker.wait(1).response  //timeout 1 second
 		
 		If (Length:C16($t)>0)
 			
-			var $c : Collection:=Split string:C1554(Substring:C12($t; 1; Length:C16($t)-1); " ")
+			$c:=Split string:C1554(Substring:C12($t; 1; Length:C16($t)-1); " ")
 			
 			If ($c.length>2)
 				
@@ -785,7 +803,26 @@ https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
 		
 	Else 
 		
-		//🤔
+		// Windows: read current highlight color from user registry (RGB as "R G B")
+		$systemWorker:=4D:C1709.SystemWorker.new("reg query \"HKCU\\Control Panel\\Colors\" /v Hilight")
+		$t:=$systemWorker.wait(1).response  //timeout 1 second
+		
+		If (Length:C16($t)>0)
+			ARRAY LONGINT:C221($len; 0x0000)
+			ARRAY LONGINT:C221($pos; 0x0000)
+			
+			If (Match regex:C1019("(?mi-s)Hilight\\s+REG_SZ\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)"; $t; 1; $pos; $len))
+				$o:={\
+					red: Num:C11(Substring:C12($t; $pos{1}; $len{1})); \
+					green: Num:C11(Substring:C12($t; $pos{2}; $len{2})); \
+					blue: Num:C11(Substring:C12($t; $pos{3}; $len{3}))\
+					}
+				
+				return This:C1470.setRGB($o)
+				
+			End if 
+		End if 
+		
 		return This:C1470
 		
 	End if 
@@ -813,12 +850,12 @@ Function _convertColor($color : Integer; $format : Text) : Variant
 			//………………………………………………………………………………………………………
 		: ($format="rgb")
 			
-			return (New object:C1471(\
-				"alpha"; $alpha; \
-				"red"; $red; \
-				"green"; $green; \
-				"blue"; $blue\
-				))
+			return ({\
+				alpha: $alpha; \
+				red: $red; \
+				green: $green; \
+				blue: $blue\
+				})
 			
 			//………………………………………………………………………………………………………
 		: ($format="hsl")
@@ -866,144 +903,72 @@ Function _convertRgb($color : Object; $format : Text) : Variant
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function _rgb2Hsl($r : Integer; $g : Integer; $b : Integer)->$value : Object
 	
-	var $blue; $green; $red : Real
+	var $blue; $delta; $green; $hue; $lightness; $max; $min; $red; $saturation : Real
 	
-	//in the interval [0, 1]
-	$red:=Num:C11($r)*100/255
-	$green:=Num:C11($g)*100/255
-	$blue:=Num:C11($b)*100/255
+	// Normalize RGB components to [0, 1]
+	$red:=Num:C11($r)/255
+	$green:=Num:C11($g)/255
+	$blue:=Num:C11($b)/255
 	
-	$value:=New object:C1471(\
-		"hue"; 0; \
-		"saturation"; 0; \
-		"lightness"; 0\
-		)
+	$value:={\
+		hue: 0; \
+		saturation: 0; \
+		lightness: 0\
+		}
 	
-	Case of 
-			
-			//________________________________________
-		: ($red=$blue)\
-			 & ($blue=$green)  // Grey
-			
-			$value.lightness:=$blue
-			
-			//________________________________________
-		: ($red>$green)\
-			 & ($green=$blue)
-			
-			$value.lightness:=$red
-			$value.saturation:=100*($value.lightness-$blue)/$value.lightness
-			
-			//________________________________________
-		: ($red>$green)\
-			 & ($green>$blue)
-			
-			$value.lightness:=$red
-			$value.saturation:=100*($value.lightness-$blue)/$value.lightness
-			
-			// More the green increases, more the hue increases (1 to 59)
-			$value.hue:=60*(($green-$blue)/($red-$blue))
-			
-			//________________________________________
-		: ($green=$red)\
-			 & ($red>$blue)
-			
-			$value.lightness:=$red
-			$value.saturation:=100*($value.lightness-$blue)/$value.lightness
-			$value.hue:=60
-			
-			//________________________________________
-		: ($green>$red)\
-			 & ($red>$blue)
-			
-			$value.lightness:=$green
-			$value.saturation:=100*($value.lightness-$blue)/$value.lightness
-			
-			// More the red decreases, more the hue increases (61 to 119)
-			$value.hue:=60+(60*(($green-$red)/($green-$blue)))
-			
-			//________________________________________
-		: ($green>$blue)\
-			 & ($blue=$red)
-			
-			$value.lightness:=$green
-			$value.saturation:=100*($value.lightness-$red)/$value.lightness
-			$value.hue:=120
-			
-			//________________________________________
-		: ($green>$blue)\
-			 & ($blue>$red)
-			
-			$value.lightness:=$green
-			$value.saturation:=100*($value.lightness-$red)/$value.lightness
-			
-			// More the blue increases, more the hue increases (121 to 179)
-			$value.hue:=120+(60*(($blue-$red)/($green-$red)))
-			
-			//________________________________________
-		: ($blue=$green)\
-			 & ($green>$red)
-			
-			$value.lightness:=$green
-			$value.saturation:=100*($value.lightness-$red)/$value.lightness
-			$value.hue:=180
-			
-			//________________________________________
-		: ($blue>$green)\
-			 & ($green>$red)
-			
-			$value.lightness:=$blue
-			$value.saturation:=100*($value.lightness-$red)/$value.lightness
-			
-			// More the green decreases, more the hue increases (181 to 239)
-			$value.hue:=180+(60*(($blue-$green)/($blue-$red)))
-			
-			//________________________________________
-		: ($blue>$red)\
-			 & ($red=$green)
-			
-			$value.lightness:=$blue
-			$value.saturation:=100*($value.lightness-$green)/$value.lightness
-			$value.hue:=240
-			
-			//________________________________________
-		: ($blue>$red)\
-			 & ($red>$green)
-			
-			$value.lightness:=$blue
-			$value.saturation:=100*($value.lightness-$green)/$value.lightness
-			
-			// More the red increases, more the hue increases (241 to 299)
-			$value.hue:=240+(60*(($red-$green)/($blue-$green)))
-			
-			//________________________________________
-		: ($red=$blue)\
-			 & ($blue>$green)
-			
-			$value.lightness:=$blue
-			$value.saturation:=100*($value.lightness-$green)/$value.lightness
-			
-			//________________________________________
-		: ($red>=$blue)\
-			 & ($blue>=$green)
-			
-			$value.lightness:=$red
-			$value.saturation:=100*($value.lightness-$green)/$value.lightness
-			
-			// More the blue decreases, more the hue increases (300 to 360)
-			$value.hue:=300+(60*(($red-$blue)/($red-$green)))
-			
-			//________________________________________
-	End case 
+	$max:=$red
+	If ($green>$max)
+		$max:=$green
+	End if 
+	If ($blue>$max)
+		$max:=$blue
+	End if 
 	
-	$value.lightness:=Round:C94($value.lightness; 0)
-	$value.saturation:=Round:C94($value.saturation; 0)
-	$value.hue:=Round:C94($value.hue; 0)
+	$min:=$red
+	If ($green<$min)
+		$min:=$green
+	End if 
+	If ($blue<$min)
+		$min:=$blue
+	End if 
+	
+	$delta:=$max-$min
+	$lightness:=($max+$min)/2
+	
+	If ($delta=0)
+		$hue:=0
+		$saturation:=0
+	Else 
+		If ($lightness<0.5)
+			$saturation:=$delta/($max+$min)
+		Else 
+			$saturation:=$delta/(2-$max-$min)
+		End if 
+		
+		Case of 
+			: ($max=$red)
+				$hue:=($green-$blue)/$delta
+				If ($green<$blue)
+					$hue:=$hue+6
+				End if 
+			: ($max=$green)
+				$hue:=2+(($blue-$red)/$delta)
+			Else 
+				$hue:=4+(($red-$green)/$delta)
+		End case 
+		
+		$hue:=$hue*60
+	End if 
+	
+	$value.hue:=Round:C94($hue; 0)
+	$value.hue:=$value.hue%360
+	$value.saturation:=Round:C94($saturation*100; 0)
+	$value.lightness:=Round:C94($lightness*100; 0)
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function _convertHSL($color : Object; $format : Text) : Variant
 	
-	var $blue; $green; $hue; $lightness; $max; $min; $offset; $red; $saturation : Integer
+	var $blue; $green; $hue; $lightness; $p; $q; $red; $saturation : Real
 	var $hsl : Object
 	
 	$hsl:=Count parameters:C259>=1 ? $color : This:C1470.hsl
@@ -1012,71 +977,22 @@ Function _convertHSL($color : Object; $format : Text) : Variant
 	If ($format#"css")
 		
 		$hue:=Num:C11($hsl.hue)%360  //0 to 360°
-		$saturation:=Num:C11($hsl.saturation)  //0 to 100%
-		$lightness:=Num:C11($hsl.lightness)  //0 to 100%
+		$saturation:=Num:C11($hsl.saturation)/100  //0 to 1
+		$lightness:=Num:C11($hsl.lightness)/100  //0 to 1
 		
-		$max:=$lightness*255/100  // RGB from  0 to 255
-		$min:=$max*((100-$saturation)/100)
-		$offset:=$max-$min
+		// Calculate q and p for HSL to RGB conversion
+		If ($lightness<0.5)
+			$q:=$lightness*(1+$saturation)
+		Else 
+			$q:=$lightness+$saturation-($lightness*$saturation)
+		End if 
 		
-		Case of 
-				
-				//________________________________________
-			: ($hue>=300)
-				
-				$red:=$max
-				$green:=$min
-				
-				// Blue descending
-				$blue:=Round:C94($max-($offset*(($hue-300)/60)); 0)
-				
-				//________________________________________
-			: ($hue>=240)
-				
-				$blue:=$max
-				$green:=$min
-				
-				// Red Crescent
-				$red:=Round:C94($min+($offset*(($hue-240)/60)); 0)
-				
-				//________________________________________
-			: ($hue>=180)
-				
-				$blue:=$max
-				$red:=$min
-				
-				// Green descending
-				$green:=Round:C94($max-($offset*(($hue-180)/60)); 0)
-				
-				//________________________________________
-			: ($hue>=120)
-				
-				$green:=$max
-				$red:=$min
-				
-				// Blue Crescent
-				$blue:=Round:C94($min+($offset*(($hue-120)/60)); 0)
-				
-				//________________________________________
-			: ($hue>=60)
-				
-				$green:=$max
-				$blue:=$min
-				
-				// Red descending
-				$red:=Round:C94($max-($offset*(($hue-60)/60)); 0)
-				
-				//________________________________________
-			: ($hue>=0)
-				
-				$red:=$max
-				$blue:=$min
-				
-				// Green Crescent
-				$green:=Round:C94($min+($offset*($hue/60)); 0)
-				
-				//________________________________________
-		End case 
+		$p:=2*$lightness-$q
+		
+		// Convert each component
+		$red:=Round:C94(255*This:C1470._hueToRGB($p; $q; ($hue/360)+(1/3)); 0)
+		$green:=Round:C94(255*This:C1470._hueToRGB($p; $q; $hue/360); 0)
+		$blue:=Round:C94(255*This:C1470._hueToRGB($p; $q; ($hue/360)-(1/3)); 0)
 		
 	End if 
 	
@@ -1090,10 +1006,10 @@ Function _convertHSL($color : Object; $format : Text) : Variant
 			//………………………………………………………………………………………………………
 		: ($format="rgb")
 			
-			return (New object:C1471(\
-				"red"; $red; \
-				"green"; $green; \
-				"blue"; $blue))
+			return ({\
+				red: $red; \
+				green: $green; \
+				blue: $blue})
 			
 			//………………………………………………………………………………………………………
 		: ($format="css")
@@ -1106,7 +1022,7 @@ Function _convertHSL($color : Object; $format : Text) : Variant
 	End case 
 	
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
-Function _hueToRGB($v1 : Real; $v2 : Real; $vH : Real) : Integer
+Function _hueToRGB($v1 : Real; $v2 : Real; $vH : Real) : Real
 	
 	Case of 
 			

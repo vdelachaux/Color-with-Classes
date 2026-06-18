@@ -9,7 +9,7 @@ Case of
 		
 		var $c : Collection:=JSON Parse:C1218(File:C1566("/RESOURCES/colors.json").getText()).indexed
 		
-		var $svg:=cs:C1710.svgx.svg.new().setAttributes(New object:C1471(\
+		var $svg:=cs:C1710.svgx.svg.new().setAttributes(New object(\
 			"stroke-width"; 1; \
 			"stroke"; "white"))
 		

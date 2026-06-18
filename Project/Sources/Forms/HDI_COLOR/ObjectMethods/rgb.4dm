@@ -1,9 +1,11 @@
 var $i : Integer
 var $o : Object
 var $c : Collection
+var $kind : Integer
 
 $o:=OBJECT Get value:C1743(OBJECT Get name:C1087(Object current:K67:2))
-$c:=Form:C1466.color.setRGB(OBJECT Get value:C1743(OBJECT Get name:C1087(Object current:K67:2))).getMatchingColors(Form:C1466.complementaryDropdown.index)
+$kind:=Form:C1466.matchingSchemeConstants[Form:C1466.complementaryDropdown.index]
+$c:=Form:C1466.color.setRGB(OBJECT Get value:C1743(OBJECT Get name:C1087(Object current:K67:2))).getMatchingColors($kind)
 
 Form:C1466.main:=Form:C1466.color.main
 OBJECT SET RGB COLORS:C628(*; "main"; Form:C1466.main; Form:C1466.main)

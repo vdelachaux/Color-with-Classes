@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xliff version="1.0" xmlns:d4="http://www.4d.com/d4-ns">
+  <file datatype="x-4DK#" original="x-undefined" source-language="x-none" target-language="x-none">
+    <body>
+      <group resname="themes">
+        <trans-unit id="thm_1" resname="COLOR_MATCHING_SCHEME" translate="no">
+          <source>Color Matching Scheme</source>
+        </trans-unit>
+      </group>
+
+      <group d4:groupName="COLOR_MATCHING_SCHEME" restype="x-4DK#">
+        <trans-unit id="k_1" d4:value="0">
+          <source>kMatchingSchemeComplementary</source>
+        </trans-unit>
+        <trans-unit id="k_2" d4:value="1">
+          <source>kMatchingSchemeSplitComplementary</source>
+        </trans-unit>
+        <trans-unit id="k_3" d4:value="2">
+          <source>kMatchingSchemeTriadic</source>
+        </trans-unit>
+        <trans-unit id="k_4" d4:value="3">
+          <source>kMatchingSchemeAnalogous</source>
+        </trans-unit>
+        <trans-unit id="k_5" d4:value="4">
+          <source>kMatchingSchemeMonochromatic</source>
+        </trans-unit>
+        <trans-unit id="k_6" d4:value="5">
+          <source>kMatchingSchemeTetradic</source>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

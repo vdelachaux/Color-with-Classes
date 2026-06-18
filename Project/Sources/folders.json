@@ -13,5 +13,10 @@
 			"HDI_COLOR"
 		]
 	},
+	"TESTS": {
+		"methods": [
+			"test_color"
+		]
+	},
 	"trash": {}
 }

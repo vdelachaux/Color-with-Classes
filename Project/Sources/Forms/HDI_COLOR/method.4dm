@@ -12,22 +12,30 @@ Case of
 		
 		Form:C1466.foreground:=Choose:C955(FORM Get color scheme:C1761="dark"; 0x00FFFFFF; "silver")
 		
-		OBJECT SET VALUE:C1742("4DPalette"; New object:C1471("index"; 0))
+		OBJECT SET VALUE:C1742("4DPalette"; {index: 0})
 		OBJECT SET VALUE:C1742("dominant"; 1)
 		
-		Form:C1466.nammedDropdown:=New object:C1471(\
-			"values"; JSON Parse:C1218(File:C1566("/RESOURCES/colors.json").getText()).named.extract("name"); \
-			"index"; 8)
+		Form:C1466.nammedDropdown:={\
+			values: JSON Parse:C1218(File:C1566("/RESOURCES/colors.json").getText()).named.extract("name"); \
+			index: 8}
 		
-		Form:C1466.complementaryDropdown:=New object:C1471(\
-			"values"; New collection:C1472(\
+		Form:C1466.complementaryDropdown:={\
+			values: [\
 			"Complementary (1)"; \
 			"Split-Complementary (2)"; \
 			"Triadic complementary (2)"; \
 			"Analogous (2)"; \
 			"Monochromatic (3)"; \
-			"Tetradic (4)"); \
-			"index"; 5)
+			"Tetradic (4)"]; \
+			index: 5}
+		
+		Form:C1466.matchingSchemeConstants:=[\
+			kMatchingSchemeComplementary; \
+			kMatchingSchemeSplitComplementary; \
+			kMatchingSchemeTriadic; \
+			kMatchingSchemeAnalogous; \
+			kMatchingSchemeMonochromatic; \
+			kMatchingSchemeTetradic]
 		
 		Form:C1466.picker:=False:C215
 		
@@ -41,7 +49,9 @@ Case of
 		OBJECT SET RGB COLORS:C628(*; "main"; Form:C1466.main; Form:C1466.main)
 		
 		var $c : Collection
-		$c:=Form:C1466.color.setColor(Form:C1466.main).getMatchingColors(Form:C1466.complementaryDropdown.index)
+		var $kind : Integer
+		$kind:=Form:C1466.matchingSchemeConstants[Form:C1466.complementaryDropdown.index]
+		$c:=Form:C1466.color.setColor(Form:C1466.main).getMatchingColors($kind)
 		
 		var $i : Integer
 		For ($i; 0; 3; 1)

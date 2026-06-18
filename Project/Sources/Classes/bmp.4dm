@@ -1,11 +1,10 @@
+property codec:="com.microsoft.bmp"
+property data : Blob
+property header; map : Object
+property success:=False:C215
+property error : Text
+
 Class constructor($picture : Picture)
-	
-	This:C1470.data:=Null:C1517
-	This:C1470.header:=Null:C1517
-	This:C1470.success:=False:C215
-	This:C1470.error:=""
-	
-	This:C1470.codec:="com.microsoft.bmp"
 	
 	If (Count parameters:C259>=1)
 		
@@ -54,10 +53,10 @@ Function getMediumColor()->$color : Integer
 	
 	If ($map#Null:C1517)
 		
-		$rgb:=New object:C1471(\
-			"red"; 0; \
-			"green"; 0; \
-			"blue"; 0)
+		$rgb:={\
+			red: 0; \
+			green: 0; \
+			blue: 0}
 		
 		$pixels:=$map.red.length
 		
@@ -144,10 +143,10 @@ Function getDominantColor($accuracy : Integer)->$color : Integer
 	
 	If ($map#Null:C1517)
 		
-		$rgb:=New object:C1471(\
-			"red"; 0; \
-			"green"; 0; \
-			"blue"; 0)
+		$rgb:={\
+			red: 0; \
+			green: 0; \
+			blue: 0}
 		
 		$pixels:=$map.red.length
 		$c:=New collection:C1472.resize($pixels)
@@ -185,9 +184,9 @@ Function getDominantColor($accuracy : Integer)->$color : Integer
 						
 						If ($o=Null:C1517)
 							
-							$c.push(New object:C1471(\
-								"color"; $color; \
-								"weight"; 1))
+							$c.push({\
+								color: $color; \
+								weight: 1})
 							
 						Else 
 							
@@ -255,7 +254,7 @@ Function getBitmap() : Object
 		
 		If (This:C1470.map=Null:C1517)
 			
-			$map:=New object:C1471
+			$map:={}
 			
 			$header:=This:C1470.header
 			
@@ -317,10 +316,9 @@ Function getBitmap() : Object
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function getHeader()->$header : Object
 	
-	var $data : Blob
-	$data:=This:C1470.data
+	var $data:=This:C1470.data
 	
-	$header:=New object:C1471
+	$header:={}
 	
 	// UINT16 File Type = 'BM'
 	var $offset : Integer
@@ -337,7 +335,6 @@ Function getHeader()->$header : Object
 			
 			// INT16 Reserved Field(1)
 			// INT16 Reserved Field(2)
-			var $offset : Integer
 			$offset:=0x000A
 			
 			// UINT32 Starting Position of Image Data (offset in bytes)
@@ -409,21 +406,21 @@ Function getHeader()->$header : Object
 								var $dataSize : Integer
 								$dataSize:=$fileSize-$startOffset
 								
-								$header:=New object:C1471(\
-									"size"; $headerSize; \
-									"x"; 0; \
-									"y"; $y; \
-									"width"; $width; \
-									"height"; $height; \
-									"nbPixel"; ($dataSize-($padding*$height))\$pixelSize; \
-									"lineShift"; $lineShift; \
-									"planes"; $planes; \
-									"colorDepth"; $colorDepth; \
-									"pixelNumber"; $width*Abs:C99($height); \
-									"pixelSize"; $pixelSize; \
-									"padding"; $padding; \
-									"startOffset"; $startOffset; \
-									"topToBottom"; $isTopToBottom)
+								$header:={\
+									size: $headerSize; \
+									x: 0; \
+									y: $y; \
+									width: $width; \
+									height: $height; \
+									nbPixel: ($dataSize-($padding*$height))\$pixelSize; \
+									lineShift: $lineShift; \
+									planes: $planes; \
+									colorDepth: $colorDepth; \
+									pixelNumber: $width*Abs:C99($height); \
+									pixelSize: $pixelSize; \
+									padding: $padding; \
+									startOffset: $startOffset; \
+									topToBottom: $isTopToBottom}
 								
 							Else 
 								
@@ -494,7 +491,7 @@ Function getPixel($x : Integer; $y : Integer) : Object
 	
 	$offset:=This:C1470.getPixelOffset($x; $y)
 	
-	$pixel:=New object:C1471
+	$pixel:={}
 	$pixel.red:=This:C1470.map.red[$offset]
 	$pixel.green:=This:C1470.map.green[$offset]
 	$pixel.blue:=This:C1470.map.blue[$offset]
