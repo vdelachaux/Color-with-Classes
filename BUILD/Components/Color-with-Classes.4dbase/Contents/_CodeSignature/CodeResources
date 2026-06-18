@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/InfoPlist.strings</key>
 		<data>
-		u502y12QNYkRp4vifK//+qWdxPo=
+		CJETc1TRFMUVzAG2lWLk1cBSlXI=
 		</data>
 		<key>Resources/color-matching-constants.xlf</key>
 		<data>
@@ -16,6 +16,15 @@
 		<data>
 		9OM0qhXlgGtGTOzrY9/nFa7zHEg=
 		</data>
+		<key>Resources/en.lproj/syntaxEN.json</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			q+jjNyC2Atri5vbAvjnLLrpOBCo=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>Resources/logo.svg</key>
 		<data>
 		nbqmcLdVsS3T+VOLpb0lwy5U9xk=
@@ -27,7 +36,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			bmJcAKeGktlzVgL/AOcu3jSwTA0=
+			3u4GKSXy2Fr0WECpFwRiUfdYxUg=
 			</data>
 			<key>requirement</key>
 			<string>identifier "Color-with-Classes.4DZ" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = DYRKW64QA9</string>
@@ -57,14 +66,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			uJTAFbRr8M8gNt7Dy6DTXmqYAsPU1Zcj1AlikiVzz8Q=
+			890+0IselqcF/bZcrg+EHhCzZC7zpyUu4WfFC9B5X/o=
 			</data>
 		</dict>
 		<key>Resources/InfoPlist.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			q65H4sHgMKVxgaDVLCbDUTv0Ib9xSTtAscQT8GFU0oY=
+			JJ22cMJ9gSDfm2PRoN+JAfbElG7FBycGnJ0SJXuyO9w=
 			</data>
 		</dict>
 		<key>Resources/color-matching-constants.xlf</key>
@@ -80,6 +89,15 @@
 			<data>
 			F9FCDAb7/FjJPLQV5D56r3iOhMVk4C2b3VGpIlR+7VU=
 			</data>
+		</dict>
+		<key>Resources/en.lproj/syntaxEN.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rUXRvQIA4hUErfHuSiIb/wwMF0qfSiaAU7IWtlHdiEs=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 		<key>Resources/logo.svg</key>
 		<dict>

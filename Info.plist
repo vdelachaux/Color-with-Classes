@@ -6,7 +6,7 @@
     <key>NSHumanReadableCopyright</key>
     <string>©vdl 2021-2026</string>
     <key>CFBundleVersion</key>
-    <string>313</string>
+    <string>315</string>
     <key>CFBundleDisplayName</key>
     <string>color-with-classes</string>
     <key>CFBundleShortVersionString</key>
@@ -14,7 +14,7 @@
     <key>CFBundleGetInfoString</key>
     <string>21.1</string>
     <key>CFBundleLongVersionString</key>
-    <string>21.1 (312)</string>
+    <string>21.1 (314)</string>
     <key>CFBundleName</key>
     <string>Color-with-Classes</string>
   </dict>

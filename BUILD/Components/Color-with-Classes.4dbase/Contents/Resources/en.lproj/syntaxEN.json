@@ -1,0 +1,474 @@
+{
+	"_method_": {},
+	"cs.color": {
+		"color": {
+			"new()": {
+				"Syntax": "**.new**( *color* : Variant )",
+				"Params": [
+					[
+						"color",
+						"Variant",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		},
+		"bmp": {
+			"new()": {
+				"Syntax": "**.new**( *picture* : Picture )",
+				"Params": [
+					[
+						"picture",
+						"Picture",
+						"->"
+					]
+				],
+				"Summary": ""
+			}
+		}
+	},
+	"color": {
+		"fontColor()": {
+			"Syntax": "**.fontColor**( *backgroundColor* : Variant; *green* : Integer; *blue* : Integer ) : Text",
+			"Params": [
+				[
+					"backgroundColor",
+					"Variant",
+					"->"
+				],
+				[
+					"green",
+					"Integer",
+					"->"
+				],
+				[
+					"blue",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"highlightColor()": {
+			"Syntax": "**.highlightColor**() : cs.color.color",
+			"Params": [
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"isValid()": {
+			"Syntax": "**.isValid**() : Boolean",
+			"Params": [
+				[
+					"",
+					"Boolean",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"set main()": {
+			"Syntax": "**.set main**( *value* : Integer )",
+			"Params": [
+				[
+					"value",
+					"Integer",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"hslToCss()": {
+			"Syntax": "**.hslToCss**( *hsl* : Object ) : Text",
+			"Params": [
+				[
+					"hsl",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Text",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"rgbToColor()": {
+			"Syntax": "**.rgbToColor**( *rgb* : Object ) : Integer",
+			"Params": [
+				[
+					"rgb",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"hslToRGB()": {
+			"Syntax": "**.hslToRGB**( *hsl* : Object ) : Object",
+			"Params": [
+				[
+					"hsl",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"colorToRGB()": {
+			"Syntax": "**.colorToRGB**( *color* : Variant ) : Object",
+			"Params": [
+				[
+					"color",
+					"Variant",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"colorToHSL()": {
+			"Syntax": "**.colorToHSL**( *color* : Integer ) : Object",
+			"Params": [
+				[
+					"color",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"rgbToHSL()": {
+			"Syntax": "**.rgbToHSL**( *rgb* : Object ) : Object",
+			"Params": [
+				[
+					"rgb",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setColorIndexed()": {
+			"Syntax": "**.setColorIndexed**( *color* : Integer ) : cs.color.color",
+			"Params": [
+				[
+					"color",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"colorToCSS()": {
+			"Syntax": "**.colorToCSS**( *color* : Integer; *type* : Text )->css : Variant",
+			"Params": [
+				[
+					"color",
+					"Integer",
+					"->"
+				],
+				[
+					"type",
+					"Text",
+					"->"
+				],
+				[
+					"css",
+					"Variant",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"hslToColor()": {
+			"Syntax": "**.hslToColor**( *hsl* : Object ) : Integer",
+			"Params": [
+				[
+					"hsl",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setRGB()": {
+			"Syntax": "**.setRGB**( *rgb* : Object ) : cs.color.color",
+			"Params": [
+				[
+					"rgb",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"colorPicker()": {
+			"Syntax": "**.colorPicker**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setColor()": {
+			"Syntax": "**.setColor**( *color* : Integer ) : cs.color.color",
+			"Params": [
+				[
+					"color",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setCSS()": {
+			"Syntax": "**.setCSS**( *css* : Text ) : cs.color.color",
+			"Params": [
+				[
+					"css",
+					"Text",
+					"->"
+				],
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setHSL()": {
+			"Syntax": "**.setHSL**( *hsl* : Object ) : cs.color.color",
+			"Params": [
+				[
+					"hsl",
+					"Object",
+					"->"
+				],
+				[
+					"",
+					"cs.color.color",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"get main()": {
+			"Syntax": "**.get main**() : Integer",
+			"Params": [
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getMatchingColors()": {
+			"Syntax": "**.getMatchingColors**( *kind* : Integer )->palette : Collection",
+			"Params": [
+				[
+					"kind",
+					"Integer",
+					"->"
+				],
+				[
+					"palette",
+					"Collection",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"css": {
+			"Syntax": "css : Object"
+		},
+		"hsl": {
+			"Syntax": "hsl : Object"
+		},
+		"rgb": {
+			"Syntax": "rgb : Object"
+		}
+	},
+	"bmp": {
+		"getPixel()": {
+			"Syntax": "**.getPixel**( *x* : Integer; *y* : Integer ) : Object",
+			"Params": [
+				[
+					"x",
+					"Integer",
+					"->"
+				],
+				[
+					"y",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getHeader()": {
+			"Syntax": "**.getHeader**()->header : Object",
+			"Params": [
+				[
+					"header",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getDominantColor()": {
+			"Syntax": "**.getDominantColor**( *accuracy* : Integer )->color : Integer",
+			"Params": [
+				[
+					"accuracy",
+					"Integer",
+					"->"
+				],
+				[
+					"color",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getPixelOffset()": {
+			"Syntax": "**.getPixelOffset**( *x* : Integer; *y* : Integer ) : Integer",
+			"Params": [
+				[
+					"x",
+					"Integer",
+					"->"
+				],
+				[
+					"y",
+					"Integer",
+					"->"
+				],
+				[
+					"",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getMediumColor()": {
+			"Syntax": "**.getMediumColor**()->color : Integer",
+			"Params": [
+				[
+					"color",
+					"Integer",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"getBitmap()": {
+			"Syntax": "**.getBitmap**() : Object",
+			"Params": [
+				[
+					"",
+					"Object",
+					"<-"
+				]
+			],
+			"Summary": ""
+		},
+		"setPicture()": {
+			"Syntax": "**.setPicture**( *picture* : Picture )",
+			"Params": [
+				[
+					"picture",
+					"Picture",
+					"->"
+				]
+			],
+			"Summary": ""
+		},
+		"map": {
+			"Syntax": "map : Object"
+		},
+		"data": {
+			"Syntax": "data : Blob"
+		},
+		"success": {
+			"Syntax": "success : Boolean"
+		},
+		"header": {
+			"Syntax": "header : Object"
+		},
+		"error": {
+			"Syntax": "error : Text"
+		},
+		"codec": {
+			"Syntax": "codec : Text"
+		}
+	}
+}
