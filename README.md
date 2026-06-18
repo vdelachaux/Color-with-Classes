@@ -1,3 +1,7 @@
+[![Dev Component](https://img.shields.io/badge/Dev%20Component-blue?logo=4d)](https://developer.4d.com) [![Project Dependencies](https://img.shields.io/badge/Project%20Dependencies-blue?logo=4d)](https://developer.4d.com/docs/Project/components/#loading-components)
+<br>
+[![language](https://img.shields.io/github/languages/top/vdelachaux/Color-with-Classes.svg)](https://developer.4d.com/) ![code-size](https://img.shields.io/github/languages/code-size/vdelachaux/Color-with-Classes.svg) [![release](https://img.shields.io/github/v/release/vdelachaux/Color-with-Classes?include_prereleases)](https://github.com/vdelachaux/Color-with-Classes/releases/latest) [![license](https://img.shields.io/github/license/vdelachaux/Color-with-Classes)](LICENSE) [![Build](https://github.com/vdelachaux/Color-with-Classes/actions/workflows/build.yml/badge.svg)](https://github.com/vdelachaux/Color-with-Classes/actions/workflows/build.yml) ![downloads](https://img.shields.io/github/downloads/vdelachaux/Color-with-Classes/total)
+
 # Color-with-Classes
 
 I was led to develop, for the [4D Go mobile](https://blog.4d.com/tag/go-mobile/) project editor, a management of colors and their conversions from one system to another, the calculation of color harmonies and even the detection of the dominant color of an image. This project is the result of this research in the form of 2 classes: [color](Documentation/Classes/color.md) & [bmp](Documentation/Classes/bmp.md) and a test form. 
