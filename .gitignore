@@ -1,5 +1,9 @@
 .*
 !.gitignore
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml
+!.github/workflows/*.yaml
 Data
 Resources/php.ini
 Settings/backup.4DSettings
