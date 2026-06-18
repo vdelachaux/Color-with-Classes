@@ -3,6 +3,6 @@
 		<compiler>
 			<options compilation_path="4" syntax_file="true" target="all"/>
 		</compiler>
-		<general component_classStore_name="colors" execute_host_database_event="true"/>
+		<general component_classStore_name="ColorTools" execute_host_database_event="true"/>
 	</com.4d>
 </preferences>
