@@ -24,4 +24,4 @@ jobs:
 
       - name: Upload
         run: |
-          gh release upload ${{github.event.release.tag_name}} build/${{github.event.repository.name}}.zip
+          gh release upload ${{github.event.release.tag_name}} BUILD/${{github.event.repository.name}}.zip
