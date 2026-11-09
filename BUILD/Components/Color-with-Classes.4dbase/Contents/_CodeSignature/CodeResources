@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/InfoPlist.strings</key>
 		<data>
-		Z5K25P8IvPC14R1vCj0yxXHvk2g=
+		+9QbbzxN+VBzfSMin5ReGvud8Ns=
 		</data>
 		<key>Resources/color-matching-constants.xlf</key>
 		<data>
@@ -36,13 +36,17 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			UoTfgW/CDltXN2A32PE3GjEr+Yc=
+			7qDW963Elhf/BUc9EEFKgkVQJug=
 			</data>
 			<key>requirement</key>
-			<string>identifier "Color-with-Classes.4DZ" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = DYRKW64QA9</string>
+			<string>identifier "Color-with-Classes.4DZ" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Vincent de Lachaux (99U8H5L528)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 		</dict>
 		<key>Documentation/Classes/bmp.md</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			m3IeHs1YOyEX5h25yx/K5og6pbA=
+			</data>
 			<key>hash2</key>
 			<data>
 			Rsip34cllA8+1BfNSv+C26Hr73aktdZrExb1VqvNbEI=
@@ -50,6 +54,10 @@
 		</dict>
 		<key>Documentation/Classes/color.md</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			5V/MP9bevHEQODsRu3jbfZRRjmc=
+			</data>
 			<key>hash2</key>
 			<data>
 			qqUCOIOgzbEWO7ToZeYs68uUD7vjNSe3R2XE7FjBmJs=
@@ -57,6 +65,10 @@
 		</dict>
 		<key>Documentation/hdi.png</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			tN1l84UENzAWaqG20w7ldGavW4o=
+			</data>
 			<key>hash2</key>
 			<data>
 			v2YkOKNbBX2ROt6BsAgA3TZB5okyI/0vXidJuM30CsM=
@@ -64,20 +76,32 @@
 		</dict>
 		<key>Libraries/lib4d-arm64.dylib</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			i+cEpDyY6yk5c+pLuxC74q/8+/E=
+			</data>
 			<key>hash2</key>
 			<data>
-			DEKmgIoduroBNTT6UyB9PIxU/HKsdBbvqFax/FzN7V0=
+			nZ2vFcapqsUzXiOiRRodpSg6t93+A7CKx5Rk25sLVvo=
 			</data>
 		</dict>
 		<key>Resources/InfoPlist.strings</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			+9QbbzxN+VBzfSMin5ReGvud8Ns=
+			</data>
 			<key>hash2</key>
 			<data>
-			Rh5tnIe/5SNNTgnm6kCRr66sG44Ste2lbSCYYpgh1IY=
+			d7K3frDD/GYLxdHlUhzIzbx3JQNyIV+mSICkXZgN1zs=
 			</data>
 		</dict>
 		<key>Resources/color-matching-constants.xlf</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			MO8uhORQfCBIotedlKGLPhalN+Q=
+			</data>
 			<key>hash2</key>
 			<data>
 			A2Wa0PgLjRd6nifS94qrjbi+op9vH0/hdi3vMc9jvDw=
@@ -85,6 +109,10 @@
 		</dict>
 		<key>Resources/colors.json</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			9OM0qhXlgGtGTOzrY9/nFa7zHEg=
+			</data>
 			<key>hash2</key>
 			<data>
 			F9FCDAb7/FjJPLQV5D56r3iOhMVk4C2b3VGpIlR+7VU=
@@ -92,6 +120,10 @@
 		</dict>
 		<key>Resources/en.lproj/syntaxEN.json</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			Fg/B8RO2klo81DrGE/B0GmNmdEE=
+			</data>
 			<key>hash2</key>
 			<data>
 			GkWm6cdaNOqDJc4wzBs5A4DyMk7p2cgg/Pyguj+gE2s=
@@ -101,6 +133,10 @@
 		</dict>
 		<key>Resources/logo.svg</key>
 		<dict>
+			<key>hash</key>
+			<data>
+			nbqmcLdVsS3T+VOLpb0lwy5U9xk=
+			</data>
 			<key>hash2</key>
 			<data>
 			90QNQ+Wv/CUi52ds67V8oInQ1De7a00ajbjup/RO1/0=

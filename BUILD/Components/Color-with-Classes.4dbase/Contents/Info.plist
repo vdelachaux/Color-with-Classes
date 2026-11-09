@@ -4,19 +4,22 @@
 
   <dict>
     <key>NSHumanReadableCopyright</key>
-    <string>©vdl 2021-2026</string>
+    <string/>
     <key>CFBundleVersion</key>
-    <string>317</string>
+    <string/>
     <key>CFBundleDisplayName</key>
-    <string>color-with-classes</string>
+    <string>Color-with-Classes</string>
     <key>CFBundleShortVersionString</key>
-    <string>21R4</string>
+    <string/>
     <key>CFBundleGetInfoString</key>
-    <string>21R4</string>
+    <string>21.2</string>
     <key>CFBundleLongVersionString</key>
-    <string>21R4 (316)</string>
+    <string>21.2 (317)</string>
     <key>CFBundleName</key>
     <string>Color-with-Classes</string>
+    <key>CFBundlePackageType</key>
+    <string>BNDL</string>
   </dict>
+
 
 </plist>

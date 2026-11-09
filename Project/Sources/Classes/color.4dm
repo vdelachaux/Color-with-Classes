@@ -769,11 +769,6 @@ Function fontColor($backgroundColor; $green : Integer; $blue : Integer) : Text
 	// === === === === === === === === === === === === === === === === === === === === === === === === ===
 Function highlightColor() : cs:C1710.color
 	
-	var $c : Collection
-	var $o : Object
-	var $systemWorker : 4D:C1709.SystemWorker
-	var $t : Text
-	
 /*
 From Arnaud de Montard
 https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
@@ -781,16 +776,17 @@ https://discuss.4d.com/t/mac-os-system-accent-vs-highlight-color/20384/15?u=vdl
 	
 	If (Is macOS:C1572)
 		
-		$systemWorker:=4D:C1709.SystemWorker.new("defaults read -g AppleHighlightColor")
-		$t:=$systemWorker.wait(1).response  //timeout 1 second
+		// Modified 9/11/2026 Apple has deprecated `defaults` after macOS 11
+		var $systemWorker:=4D:C1709.SystemWorker.new("swift -e 'import AppKit; let c = NSColor.controlAccentColor.usingColorSpace(.deviceRGB)!; print(String(format: \"%.6f %.6f %.6f\", c.redComponent, c.greenComponent, c.blueComponent))'")
+		var $t : Text:=$systemWorker.wait(1).response  // timeout 1 second
 		
 		If (Length:C16($t)>0)
 			
-			$c:=Split string:C1554(Substring:C12($t; 1; Length:C16($t)-1); " ")
+			var $c:=Split string:C1554($t; " ")
 			
 			If ($c.length>2)
 				
-				$o:={\
+				var $o:={\
 					red: Round:C94(Num:C11($c[0]; ".")*255; 0); \
 					green: Round:C94(Num:C11($c[1]; ".")*255; 0); \
 					blue: Round:C94(Num:C11($c[2]; ".")*255; 0)\
